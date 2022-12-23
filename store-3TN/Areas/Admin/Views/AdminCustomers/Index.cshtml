@@ -1,0 +1,112 @@
+﻿@{
+	ViewData["Title"] = "Danh sách khách hàng";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int CurrentPage = ViewBag.CurrentPage;
+
+}
+@model PagedList.Core.IPagedList<store_3TN.Models.Customer>
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<!--Start page header -->
+<div class="page-header">
+	<div class="header-sub-title">
+		<nav class="breadcrumb breadcrumb-dash">
+			<a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+			<a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index">Danh sách khách hàng</a>
+			@*            <span class="breadcrumb-item active">Tạo mới quyền truy cập</span>
+			*@
+		</nav>
+	</div>
+	<!--End page header -->
+	<br />
+	<br />
+	<h1>Danh sách khách hàng</h1>
+
+	<div class="card">
+		<div class="card-body">
+			<div class="row m-b-30">
+				<div class="col-lg-8">
+					<div class="row">
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm khách hàng">
+                        </div>
+                    </div>
+                </div>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover e-commerce-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Tên khách hàng</th>
+							<th>Email</th>
+							<th>Điện thoạil</th>
+							<th>Địa chỉ</th>
+							<th>Trạng thái</th>
+						</tr>
+					</thead>
+					<tbody id="records_table">
+						@if (@Model != null)
+						{
+							foreach (var item in Model)
+							{
+								<tr>
+									<td>@item.CustomerId</td>
+									<td >@item.FullName</td>
+									<td>@item.Phone</td>
+									@*@if (item.Cat != null)
+									{
+										<td>@item.Cat.CatName</td>
+
+									}
+									else
+									{
+										<td></td>
+									}*@
+									<td>@item.Email</td>
+									<td>@item.Ward, @item.District, @item.Province </td>
+									
+									<td>
+										<a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminCusTomers" asp-action="Details" asp-route-id="@item.CustomerId">Chi tiết</a>
+@*										<a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminCusTomers" asp-action="Delete" asp-route-id="@item.CustomerId">Xóa</a>
+*@									</td>
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+				<div aria-label="Page navigation example">
+					<ul class="pagination">
+						<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index"></pager>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section Scripts{
+	<script>
+		//Tìm kiếm
+		$("#keyword").keyup(function () {
+			var strkeyword = $('#keyword').val();
+			$.ajax({
+				url: '/Admin/Search/FindCustomer/',
+				datatype: "json",
+				type: "POST",
+				data: { keyword: strkeyword },
+				async: true,
+				success: function (results) {
+					$("#records_table").html("");
+					$("#records_table").html(results);
+				},
+				error: function (xhr) {
+					alert('error');
+				}
+			});
+		});
+	</script>
+}

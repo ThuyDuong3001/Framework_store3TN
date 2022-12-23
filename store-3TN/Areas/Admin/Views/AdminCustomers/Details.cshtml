@@ -1,0 +1,63 @@
+﻿@model store_3TN.Models.Customer
+
+@{
+    ViewData["Title"] = "Chi tiết khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="header-sub-title">
+    <nav class="breadcrumb breadcrumb-dash">
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index">Danh sách sản phẩm</a>
+        <span class="breadcrumb-item active">Chi tiết khách hàng</span>
+
+    </nav>
+</div>
+<br />
+<h1>Chi tiết khách hàng</h1>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                   @* <tr>
+                        <td>ID: </td>
+                        <td class="text-dark font-weight-semibold">@Model.CustomerId</td>
+                    </tr>*@
+                    <tr>
+                        <td>Tên khách hàng: </td>
+                        <td>@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <td>Sinh nhật: </td>
+                        <td>@Model.Birthday</td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại: </td>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ: </td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td>Tỉnh/thành phố: </td>
+                        <td>@Model.Province</td>
+                    </tr>
+                    <tr>
+                        <td>Quận/huyện: </td>
+                        <td>@Model.District</td>
+                    </tr>
+                <tr>
+                    <td>Xã/thị trấn: </td>
+                    <td>@Model.Ward</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+    </div>

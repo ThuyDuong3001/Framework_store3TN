@@ -1,0 +1,67 @@
+﻿@model store_3TN.Models.Post
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminPosts" asp-action="Index">Danh sách bài viết</a>
+            <span class="breadcrumb-item active">Chỉnh sửa bài viết</span>
+        </nav>
+    </div>
+</div>
+<h1>Chỉnh sửa bài viết</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PostId" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tiêu đề</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scontents" class="control-label">Mô tả ngắn</label>
+                <input asp-for="Scontents" class="form-control" />
+                <span asp-validation-for="Scontents" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contents" class="control-label">Mô tả</label>
+                <input asp-for="Contents" class="form-control" />
+                <span asp-validation-for="Contents" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Thumb" class="control-label">Hình ảnh</label>
+                <input asp-for="Thumb" class="form-control" />
+                <span asp-validation-for="Thumb" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Author" class="control-label">Tác giả</label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsHot" /> @Html.DisplayNameFor(model => model.IsHot)
+                </label>
+            </div>           
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

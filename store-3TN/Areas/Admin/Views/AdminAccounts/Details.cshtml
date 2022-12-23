@@ -1,0 +1,40 @@
+﻿@model store_3TN.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminRoles" asp-action="Index">Danh sách quyền truy cập</a>
+            <span class="breadcrumb-item active">Thông tin tài khoản</span>
+        </nav>
+    </div>
+</div>
+<br />
+<div class="card-body">
+    <h4 class="card-title">Thông tin tài khoản</h4>
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+            <tbody>
+                <tr>
+                    <td>ID: </td>
+                    <td class="text-dark font-weight-semibold">@Model.AccountId</td>
+                </tr>
+                <tr>
+                    <td>Tên tài khoản: </td>
+                    <td>@Model.UserName</td>
+                </tr>
+                <tr>
+                    <td>Ngày tạo: </td>
+                    <td>@Model.CreateDate</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+</div>

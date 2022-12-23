@@ -1,0 +1,111 @@
+﻿@model store_3TN.Models.Post
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string htmlStr = Model.Contents;
+    htmlStr = htmlStr.Replace("\\\"", "\"");
+    htmlStr = htmlStr.Replace("\\r\\n", "\r\n");
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Chi tiết blog</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="/home">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Chi tiết</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<section class="blog_area single-post-area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post row">
+                    <div class="col-lg-12">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="@Model.Thumb" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-3  col-md-3">
+                        <div class="blog_info text-right">
+                            <ul class="blog_meta list">
+                                <li><a href="#">@Model.Author<i class="lnr lnr-user"></i></a></li>
+                                <li><a href="#">@Model.CreatedDate.Value.ToString("dd/MM/yyyy")<i
+                                            class="lnr lnr-calendar-full"></i></a></li>
+                                <li><a href="#">@Model.Views Lượt xem<i class="lnr lnr-eye"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 blog_details">
+                        @Html.Raw(htmlStr)
+                    </div>
+                </div>
+                @* <div class="navigation-area">
+                    <div class="row">
+                    <div
+                    class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                    <div class="thumb">
+                    <a href="single-blog.php?idBlog=3"><img class="img-fluid" width="80" height="40"
+                    style="object-fit:contain;"
+                    src="https://cdn.tgdd.vn/Files/2022/08/23/1458826/cach-khoi-dong-lai-ipad-khong-can-nut-home-05_1280x720-800-resize.jpg"
+                    alt=""></a>
+                    </div>
+                    <div class="detials">
+                    <p>Bài trước</p>
+                    <a href="single-blog.php?idBlog=3"
+                    title="Cách khởi động lại iPad không cần nút nguồn hay bất kỳ phím cứng nào rất tiện lợi">
+                    <h4>Cách khởi động lạ...</h4>
+                    </a>
+                    </div>
+                    </div>
+                    <div
+                    class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                    <div class="detials">
+                    <p>Bài tiếp</p>
+                    <a href="single-blog.php?idBlog=5" title="Thực hư tin đồn Apple có ý định mua " quỷ=""
+                    Đỏ',="" thương="" vụ="" sẽ="" bất="" thành?'="">
+                    <h4>Thực hư tin đồn App...</h4>
+                    </a>
+                    </div>
+                    <div class="thumb">
+                    <a href="single-blog.php?idBlog=5"><img class="img-fluid" width="80" height="40"
+                    style="object-fit:contain;"
+                    src="https://cdn.tgdd.vn/Files/2022/11/25/1490977/hoarathuongvuramromayngaygandaylatinthatthiet-anhstrettynews_1280x720-800-resize.jpg"
+                    alt=""></a>
+                    </div>
+                    </div>
+                    </div>
+                    </div> *@
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget author_widget">
+                        <img class="author_img rounded-circle"
+                            src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/09/08/thumbs/800x531/142774.jpg"
+                            width="100" height="100" style="object-fit:cover;" alt="">
+                        <h4>Phạm Thị Tươi</h4>
+                        <p>Admin</p>
+                        <div class="social_icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-github"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
+                        <p>Bất lực sinh tích cực.</p>
+                        <div class="br"></div>
+                    </aside>
+                    @* <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Bài viết gần đây</h3>
+                        </aside> *@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

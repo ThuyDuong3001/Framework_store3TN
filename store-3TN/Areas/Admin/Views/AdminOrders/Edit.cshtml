@@ -1,0 +1,146 @@
+﻿@model store_3TN.Models.Order
+
+@{
+    ViewData["Title"] = "Cập nhật trạng thái đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var customers = ViewBag.customers;
+    Dictionary<int, Customer> listCustomers = new Dictionary<int, Customer>();
+    foreach (var item in customers)
+    {
+        listCustomers.Add(item.CustomerId, item);
+    }
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i
+                    class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">Danh sách đơn
+                hàng</a>
+            <span class="breadcrumb-item active">Cập nhật trạng thái đơn hàng</span>
+        </nav>
+    </div>
+</div>
+<br />
+<h4>Cập nhật trạng thái đơn hàng</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderId" />
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label">Mã khách hàng</label>
+                <input asp-for="@Model.CustomerId" class="form-control" readonly />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tên khách hàng</label>
+                <input asp-for="@listCustomers[Model.CustomerId.Value].FullName" style="padding: 8px 20px;
+  background:#e9ecef;
+  border: none;
+  border-radius: 0px;
+  width: 100%;
+  font-size: 14px;
+  color: #777777;
+  border: 1px solid transparent;" readonly />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label">Ngày tạo đơn</label>
+                <input asp-for="OrderDate" class="form-control" readonly />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalMoney" class="control-label">Tổng tiền</label>
+                <input asp-for="TotalMoney" class="form-control" readonly />
+                <span asp-validation-for="TotalMoney" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discount" class="control-label">Giảm giá</label>
+                <input asp-for="Discount" class="form-control" readonly />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipDate" class="control-label">Dự kiến ngày ship</label>
+                <input asp-for="ShipDate" class="form-control" readonly />
+                <span asp-validation-for="ShipDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="District" class="control-label">Quận/huyện</label>
+                <input asp-for="District" class="form-control" readonly />
+                <span asp-validation-for="District" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province" class="control-label">Tỉnh/thành phố</label>
+                <input asp-for="Province" class="form-control" readonly />
+                <span asp-validation-for="Province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ward" class="control-label">Xã/thị trấn</label>
+                <input asp-for="Ward" class="form-control" readonly />
+                <span asp-validation-for="Ward" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select class="custom-select" asp-for="TransactStatus" style="min-width: 200px;"
+                    asp-items="ViewBag.lsTrangThai">
+                    <option value="" disabled selected>Trạng thái đơn hàng</option>
+                    <span asp-validation-for="TransactStatus" class="text-danger"></span>
+                </select>
+            </div>
+            @*<div class="form-group form-check">
+                <label class="form-check-label">
+                <input class="form-check-input" asp-for="Deleted" /> @Html.DisplayNameFor(model => model.Deleted)
+                </label>
+                </div>*@
+            @*<div class="form-group form-check">
+                <label class="form-check-label">
+                <input class="form-check-input" asp-for="Paid" /> Đã thanh toán
+                </label>
+                </div>
+                <div class="form-group">
+                <label asp-for="TotalMoney" class="control-label">Tổng tiền</label>
+                <input asp-for="TotalMoney" class="form-control" readonly />
+                <span asp-validation-for="TotalMoney" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="PaymentId" class="control-label"></label>
+                <input asp-for="PaymentId" class="form-control" />
+                <span asp-validation-for="PaymentId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Note" class="control-label">Ghi chú</label>
+                <input asp-for="Note" class="form-control" readonly />
+                <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Address" class="control-label">Địa chỉ</label>
+                <input asp-for="Address" class="form-control" readonly />
+                <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Discount" class="control-label">Giảm giá</label>
+                <input asp-for="Discount" class="form-control" readonly />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Province" class="control-label">Tỉnh/thánh phố</label>
+                <input asp-for="Province" class="form-control" readonly />
+                <span asp-validation-for="Province" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="District" class="control-label">Quận/huyện</label>
+                <input asp-for="District" class="form-control" readonly />
+                <span asp-validation-for="District" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Ward" class="control-label">Xã/thị trấn</label>
+                <input asp-for="Ward" class="form-control" readonly />
+                <span asp-validation-for="Ward" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <input type="submit" value="Cập nhật" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

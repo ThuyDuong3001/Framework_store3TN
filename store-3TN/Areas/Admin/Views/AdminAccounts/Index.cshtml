@@ -1,0 +1,107 @@
+﻿@model IEnumerable<store_3TN.Models.Account>
+
+@{
+    ViewData["Title"] = "Danh sách tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Dictionary<int, string> GetRoleName = new Dictionary<int, string>();
+    foreach (var item in ViewBag.Qtruycap)
+    {
+        GetRoleName.Add(item.RoleId, item.RoleName);
+    }
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index">Danh sách tài khoản quản trị</a>
+@*            <span class="breadcrumb-item active">Tạo mới quyền truy cập</span>
+*@        </nav>
+    </div>
+</div>
+<h1>Danh sách tài khoản</h1>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    @*<div class="m-b-10 m-r-15">
+                        <select class="custom-select" id="idrole" name="idrole" style="min-width: 200px;" asp-items="ViewBag.QuyenTruyCap">
+                            <option value="0" disabled selected>Chọn quyền truy cập</option>
+                        </select>
+                    </div>
+                    <div class="m-b-10">
+                        <select class="custom-select" id="idstatus" name="idstatus" style="min-width: 180px; " asp-items="ViewBag.lsTrangThai">
+                            <option value="0" disabled selected>Chọn trạng thái</option>
+                        </select>
+                    </div>*@
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <a asp-area="Admin" asp-controller="AdminAccounts" asp-action="Create">
+                    <button class="btn btn-primary">
+                        <i class="anticon anticon-plus-circle m-r-5"></i>
+                        <span>Thêm tài khoản</span>
+                    </button>
+                </a>
+                
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        
+                        <th>ID</th>
+                        <th>Tên quyền truy cập</th>
+                        <th>Tên người dùng</th>
+                        <th>Ngày tạo</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(@Model!= null)
+                    {
+                        foreach(var item in Model)
+                        {                             
+                                if (item.RoleId == 1)
+                                {
+                                    <tr>
+                                        <td>@item.AccountId</td>
+                                        <td>@GetRoleName[item.RoleId.Value]</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.CreateDate</td>
+                                        @if (item.Active)
+                                        {
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                                    <div>Hoạt động</div>
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="badge badge-danger badge-dot m-r-10"></div>
+                                                    <div>Khóa</div>
+                                                </div>
+                                            </td>
+                                        }
+
+                                        <td>
+                                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Details" asp-route-id="@item.AccountId">Chi tiết</a>
+                                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Edit" asp-route-id="@item.AccountId">Sửa</a>
+@*                                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Delete" asp-route-id="@item.AccountId">Xóa</a>
+*@                                        </td>
+                                    </tr>
+                                }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

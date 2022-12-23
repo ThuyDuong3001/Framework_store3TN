@@ -1,0 +1,161 @@
+﻿@using PagedList.Core.Mvc;
+@model PagedList.Core.IPagedList<store_3TN.Models.Post>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int CurrentPage = 1;
+    int TotalPages = 1;
+    int StartPage = 1;
+    int EndPage = 1;
+    if (ViewBag.Pager != null)
+    {
+        CurrentPage = ViewBag.CurrentPage;
+        TotalPages = ViewBag.TotalPages;
+        StartPage = ViewBag.StartPage;
+        EndPage = ViewBag.EndPage;
+    }
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Tin tức</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="/home">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Tin tức</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Blog Categorie Area =================-->
+<section>
+    <div></div>
+</section>
+<!--================Blog Area =================-->
+<section class="mt-5 blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog_left_sidebar">
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <article class="row blog_item">
+                                <div class="col-md-3">
+                                    <div class="blog_info text-right">
+                                        <ul class="blog_meta list">
+                                            <li><a href="#">@item.Author<i class="lnr lnr-user"></i></a></li>
+                                            <li><a href="#">@item.CreatedDate.Value.ToString("dd/MM/yyyy").<i
+                                                class="lnr lnr-calendar-full"></i></a></li>
+                                            <li><a href="#">@item.Views Lượt xem<i class="lnr lnr-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="blog_post">
+                                        <img src="@item.Thumb" alt="">
+                                        <div class="blog_details">
+                                            <a href="/blog/@item.PostId">
+                                                <h2>@item.Title</h2>
+                                            </a>
+                                            <p>@item.Scontents</p>
+                                            <a href="/blog/@item.PostId" class="white_bg_btn">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    }
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <div class="pagination ml-auto">
+                            @if (TotalPages > 0)
+                            {
+                                @if (CurrentPage > 1)
+                                {
+                                    <a href="/blog/?page=@(CurrentPage-1)" class="prev-arrow"><i class="fa fa-long-arrow-left"
+                                    aria-hidden="true"></i></a>
+                                }
+                                @for (var pge = StartPage; pge <= EndPage; pge++)
+                                {
+                                    @if (pge == CurrentPage)
+                                    {
+                                        <a href="#" class="active">@pge</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/blog/?page=@pge">@pge</a>
+                                    }
+                                }
+                                @if (CurrentPage < TotalPages)
+                                {
+                                    <a href="/blog/?page=@(CurrentPage+1)" class="next-arrow"><i class="fa fa-long-arrow-right"
+                                    aria-hidden="true"></i></a>
+                                }
+                            }
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Posts"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                            </span>
+                        </div><!-- /input-group -->
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single_sidebar_widget author_widget">
+                        <img class="author_img rounded-circle" src="img/blog/Maria-Kakaka.png" alt="">
+                        <h4>Maria Kakaka</h4>
+                        <!-- <p>Senior blog writer</p> -->
+                        <div class="social_icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-github"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
+                        <p>"Ăn mừng thành công cũng tốt, nhưng quan trọng hơn là bạn học được gì từ thất bại."</p>
+                        <div class="br"></div>
+                    </aside>
+
+                    @* <aside class="single_sidebar_widget ads_widget">
+                        <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
+                        <div class="br"></div>
+                        </aside>
+                        <aside class="single-sidebar-widget newsletter_widget">
+                        <h4 class="widget_title">Newsletter</h4>
+                        <p>
+                        Here, I focus on a range of items and features that we use in life without
+                        giving them a second thought.
+                        </p>
+                        <div class="form-group d-flex flex-row">
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup"
+                        placeholder="Enter email" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter email'">
+                        </div>
+                        <a href="#" class="bbtns">Subcribe</a>
+                        </div>
+                        <p class="text-bottom">You can unsubscribe at any time</p>
+                        <div class="br"></div>
+                        </aside> *@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->

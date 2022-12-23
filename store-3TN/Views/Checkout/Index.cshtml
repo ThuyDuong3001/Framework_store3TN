@@ -1,0 +1,237 @@
+﻿@model store_3TN.Models.Customer
+@using Microsoft.AspNetCore.Http
+@{
+	ViewData["Title"] = "Thanh toán";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	List<store_3TN.Models.Cart> cart = ViewBag.Cart;
+	List<store_3TN.Models.Voucher> vouchers = ViewBag.Vouchers;
+}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Thủ tục thanh toán</h1>
+				<nav class="d-flex align-items-center">
+					<a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">Thanh toán</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+	<div class="container">
+		<div class="billing_details">
+			<div class="row">
+				<form method="post" class="row contact_form">
+					<div class="col-lg-8">
+						<h3>Chi tiết đơn hàng</h3>
+
+						<div class="col-md-12 form-group p_star">
+							<label> Họ và tên: <span class="required">*</label><br />
+							<input class="form-control" type="text" asp-for="FullName" placeholder="Họ và tên" required>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<label> Số điện thoại: </label><br />
+							<input class="form-control" type="text" asp-for="Phone" placeholder="Số điện thoại"
+								required>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<label> Email: </label><br />
+							<input class="form-control" type="text" asp-for="Email" placeholder="Địa chỉ email">
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<label> Tỉnh/thành phố: <span class="required">*</label><br />
+							<input class="form-control" type="text" asp-for="Province" placeholder="Tỉnh/thành phố: "
+								required>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<label> Quận/huyện: <span class="required">*</label><br />
+							<input class="form-control" type="text" asp-for="District" placeholder="Quận/huyện: "
+								required>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<label> Xã/phường/thị trấn: <span class="required">*</label><br />
+							<input class="form-control" type="text" asp-for="Ward" placeholder="Xã/phường/thị trấn: "
+								required>
+						</div>
+						@* <div class="col-md-12 form-group p_star">
+							<select class="country_select" id="city">
+							<option value="" selected>@Model.Province</option>
+							</select>
+							</div>
+							<div class="col-md-12 form-group p_star">
+							<select class="country_select" id="district">
+							<option value="" selected>@Model.District</option>
+							</select>
+							</div>
+							<div class=" col-md-12 form-group p_star">
+							<select class="country_select" id="ward">
+							<option value="" selected>@Model.Ward</option>
+							</select>
+							</div> *@
+
+						@* <div class="col-md-4 form-group p_star">
+							<label>Tỉnh / thành phố: </label>
+							<select class="country_select" id="city" aria-label=".form-select-sm">
+							<option value="" selected>@Model.Province</option>
+							</select>
+							</div>
+							<div class="col-md-4 form-group p_star">
+							<label>Quận / huyện: </label>
+							<select class="country_select" id="district" aria-label=".form-select-sm">
+							<option value="" selected>@Model.District</option>
+							</select>
+							</div>
+							<div class="col-md-4 form-group p_star">
+							<label>Xã / phường / trị trấn: </label>
+							<select class="country_select" id="ward" aria-label=".form-select-sm">
+							<option value="" selected>@Model.Ward</option>
+							</select>
+							</div> *@
+						<div class="col-md-12 form-group p_star">
+							<label> Địa chỉ: <span class="required">*</label><br />
+							<input class="form-control" type="text" asp-for="Address" placeholder="Địa chỉ" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<label> Ghi chú: </label><br />
+							<textarea class="form-control" name="message" id="message" rows="1"
+								placeholder="Ghi chú thêm cho đơn hàng"></textarea>
+						</div>
+
+
+					</div>
+					<div class="col-lg-4">
+						<div class="order_box">
+							<h2>Đơn hàng của bạn</h2>
+							<ul class="list">
+								@* <li><a href="#">Sản phẩm <span>Giá</span></a></li>
+									<li><a href="#">Iphone 14 Pro <span class="middle">x 01</span> <span
+									class="last">$720.00</span></a></li>
+									<li><a href="#">MacBook Air 2021 <span class="middle">x 01</span> <span
+									class="last">$720.00</span></a></li>
+									<li><a href="#">AirPods Pro 2 <span class="middle">x 02</span> <span
+									class="last">$720.00</span></a></li> *@
+								@{
+									int tongtien = 0;
+									int vc1 = 0;
+									int vc2 = 0;
+									// find max value of item in voucher have type 1
+								}
+								@foreach (var item in cart)
+								{
+									<li><a href="#">@item.Product.ProductName <span class="middle">x @item.Amount</span>
+											<span class="last">@item.TotalMoney.ToString("N0") VNĐ</span></a></li>
+									tongtien += item.TotalMoney;
+								}
+								@if (vouchers != null)
+								{
+									foreach (var item in vouchers)
+									{
+										if (item.VoucherType == 1)
+										{
+											if (item.Value > vc1)
+											{
+												vc1 = item.Value;
+											}
+										}
+										else if (item.VoucherType == 2)
+										{
+											if (item.Value > vc2 && item.TotalMoneyRequire < tongtien)
+											{
+												vc2 = item.Value;
+											}
+										}
+									}
+								}
+								@{
+									int thanhtien = tongtien + 100000 - vc1 - vc2;
+								}
+							</ul>
+							<ul class="list list_2">
+								<li><a href="#">Tổng <span>@tongtien.ToString("N0") VNĐ</span></a></li>
+								<li><a href="#">Vận chuyển <span>100,000 VNĐ</span></a></li>
+								<li><a href="#">Giảm giá vận chuyển <span>@vc1.ToString("N0") VNĐ</span></a></li>
+								<li><a href="#">Giảm giá đơn hàng <span>@vc2.ToString("N0") VNĐ</span></a></li>
+								<li><a href="#">Thành tiền <span>@thanhtien.ToString("N0") VNĐ</span></a></li>
+							</ul>
+							@* <div class="payment_item">
+								<div class="radion_btn">
+								<input type="radio" id="f-option5" name="selector">
+								<label for="f-option5">Tiền mặt</label>
+								<div class="check"></div>
+								</div>
+								<p>Thanh toán đơn hàng bằng tiền mặt, bạn sẽ kiểm hàng rồi thanh toán.</p>
+								</div>
+								<div class="payment_item active">
+								<div class="radion_btn">
+								<input type="radio" id="f-option6" name="selector">
+								<label for="f-option6">Paypal </label>
+								<img src="img/product/card.jpg" alt="">
+								<div class="check"></div>
+								</div>
+								<p>Thanh toán qua thẻ ngân hàng, được kiểm hàng, phản hồi và hoàn tiền nếu có lỗi phát
+								sinh.
+								</p>
+								</div> *@
+							<div class="creat_account">
+								<input type="checkbox" id="f-option4" name="selector">
+								<label for="f-option4">Tôi đã đọc và đồng ý với </label>
+								<a href="#">các chính sách và điều kiện*</a>
+							</div>
+							<input type="submit" value="Thanh toán" name="submit" class="primary-btn">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Checkout Area =================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+	var citis = document.getElementById("city");
+	var districts = document.getElementById("district");
+	var wards = document.getElementById("ward");
+	var Parameter = {
+		url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+		method: "GET",
+		responseType: "application/json",
+	};
+	var promise = axios(Parameter);
+	promise.then(function (result) {
+		renderCity(result.data);
+	});
+
+	function renderCity(data) {
+		for (const x of data) {
+			citis.options[citis.options.length] = new Option(x.Name, x.Id);
+		}
+		citis.onchange = function () {
+			district.length = 1;
+			ward.length = 1;
+			if (this.value != "") {
+				const result = data.filter(n => n.Id === this.value);
+
+				for (const k of result[0].Districts) {
+					district.options[district.options.length] = new Option(k.Name, k.Id);
+				}
+			}
+		};
+		district.onchange = function () {
+			ward.length = 1;
+			const dataCity = data.filter((n) => n.Id === citis.value);
+			if (this.value != "") {
+				const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+				for (const w of dataWards) {
+					wards.options[wards.options.length] = new Option(w.Name, w.Id);
+				}
+			}
+		};
+	}
+</script>

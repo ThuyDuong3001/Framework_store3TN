@@ -1,0 +1,463 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+	var bestSeller = ViewBag.bestSeller;
+	var homeFlag = ViewBag.homeFlag;
+	var FreeShip = ViewBag.FreeShip;
+	var Discount = ViewBag.Discount;
+}
+
+<!-- start banner Area -->
+<section class="banner-area">
+	<div class="container">
+		<div class="row fullscreen align-items-center justify-content-start">
+			<div class="col-lg-12">
+				<div class="active-banner-slider owl-carousel">
+					<!-- single-slide -->
+					<div class="row single-slide align-items-center d-flex">
+						<div class="col-lg-5 col-md-6">
+							<div class="banner-content">
+								<h1>Bộ sưu tập Iphone 14 mới</h1>
+								<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
+								<div class="add-bag d-flex align-items-center">
+									<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
+									<span class="add-text text-uppercase">Tìm hiểu thêm</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="banner-img" style="margin-top: 100px;">
+								<img class="img-fluid" src="~/img/banner/iphone_14.png" alt="">
+							</div>
+						</div>
+					</div>
+					<!-- single-slide -->
+					<div class="row single-slide">
+						<div class="col-lg-5">
+							<div class="banner-content">
+								<h1>Bộ sưu tập Iphone 14 mới</h1>
+								<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
+								<div class="add-bag d-flex align-items-center">
+									<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
+									<span class="add-text text-uppercase">Tìm hiểu thêm</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="banner-img">
+								<img class="img-fluid" src="~/img/banner/iphone_14_2.png" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+<!-- start features Area -->
+<section class="features-area section_gap">
+	<div class="container">
+		<div class="row features-inner">
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/img/features/f-icon1.png" alt="">
+					</div>
+					<h6>Giao hàng nhanh</h6>
+					<p>Vận chuyển toàn quốc</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/img/features/f-icon2.png" alt="">
+					</div>
+					<h6>Chính sách hoàn tiền</h6>
+					<p>Hoàn tiền nếu có lỗi</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/img/features/f-icon3.png" alt="">
+					</div>
+					<h6>Hỗ trợ 24/7</h6>
+					<p>Luôn có mặt khi bạn cần</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/img/features/f-icon4.png" alt="">
+					</div>
+					<h6>Bảo mật thanh toán</h6>
+					<p>Thông tin luôn được giữ kín</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end features Area -->
+
+<!-- Start category Area -->
+<section class="category-area">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-8 col-md-12">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						<div class="single-deal bg-dark">
+							<div class="overlay"></div>
+							<img class="img-fluid w-100" src="~/img/category/iphone.png" alt="">
+							<a href="category/type/1/" target="_blank">
+								<div class="deal-details">
+									<h6 class="deal-title">Iphone Series</h6>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="single-deal bg-dark">
+							<div class="overlay"></div>
+							<img class="img-fluid w-100" src="~/img/category/macbook.png" alt="">
+							<a href="category/type/2/" target="_blank">
+								<div class="deal-details">
+									<h6 class="deal-title">MacBook Air Series</h6>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="single-deal bg-dark">
+							<div class="overlay"></div>
+							<img class="img-fluid w-100" src="~/img/category/ipads.jpg" alt="">
+							<a href="category/type/3/" target="_blank">
+								<div class="deal-details">
+									<h6 class="deal-title">Ipad Series</h6>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-8 col-md-8">
+						<div class="single-deal bg-dark">
+							<div class="overlay"></div>
+							<img class="img-fluid w-100" src="~/img/category/airpods.png" alt="">
+							<a href="category/type/4/" target="_blank">
+								<div class="deal-details">
+									<h6 class="deal-title">AirPods Series</h6>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="single-deal bg-dark">
+					<div class="overlay"></div>
+					<img class="img-fluid img-fluid-last w-100" src="~/img/category/watch.png" alt="">
+					<a href="category/type/5/" target="_blank">
+						<div class="deal-details">
+							<h6 class="deal-title">Apple Watch</h6>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End category Area -->
+
+<!-- start product Area -->
+<section class="owl-carousel section_gap">
+	<!-- single product slide -->
+	<div class="single-product">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						<h1>Sản phẩm bán chạy</h1>
+						<p>Những sản phẩm bán chạy nhất của cửa hàng chúng tôi.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				@foreach (var item in bestSeller)
+				{
+					var giaGoc = item.Price;
+					var giaKhuyenMai = item.Price - item.Price / 100 * (item.Discount == null ? 0 : item.Discount);
+					<!-- single product -->
+					<div class="col-lg-3 col-md-6">
+						<div class="single-product">
+							<img class="img-fluid" src="@item.Thumb" alt="">
+							<div class="product-details" title="@item.ProductName">
+								<h6 class="title">@item.ProductName</h6>
+								<div class="price">
+									<h6>@giaKhuyenMai.ToString("N0") VNĐ</h6>
+									<h6 class="l-through">@giaGoc.ToString("N0") VNĐ</h6>
+								</div>
+								<div class="prd-bottom">
+									<a asp-controller="Cart" asp-action="AddToCart" asp-route-ProductID="@item.ProductId"
+									class="social-info">
+										<span class="ti-bag"></span>
+										<p class="hover-text">Mua ngay</p>
+									</a>
+									<a href="" class="social-info">
+										<span class="lnr lnr-heart"></span>
+										<p class="hover-text">Yêu thích</p>
+									</a>
+									<a href="/category/@item.ProductId" class="social-info">
+										<span class="lnr lnr-move"></span>
+										<p class="hover-text">Chi tiết</p>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end product Area -->
+
+<!-- Start exclusive deal Area -->
+<section class="exclusive-deal-area">
+	<div class="container-fluid">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-6 no-padding exclusive-left">
+				<div class="row clock_sec clockdiv" id="clockdiv">
+					<div class="col-lg-12">
+						<h1>Đếm ngược ngày đến deal Hot!</h1>
+						<p>Điều hấp dẫn gì sẽ xảy ra?</p>
+					</div>
+					<div class="col-lg-12">
+						<div class="row clock-wrap">
+							<div class="col clockinner1 clockinner">
+								<h1 class="days">150</h1>
+								<span class="smalltext">Ngày</span>
+							</div>
+							<div class="col clockinner clockinner1">
+								<h1 class="hours">23</h1>
+								<span class="smalltext">Giờ</span>
+							</div>
+							<div class="col clockinner clockinner1">
+								<h1 class="minutes">47</h1>
+								<span class="smalltext">Phút</span>
+							</div>
+							<div class="col clockinner clockinner1">
+								<h1 class="seconds">59</h1>
+								<span class="smalltext">Giây</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a href="" class="primary-btn">Shop Now</a>
+			</div>
+			<div class="col-lg-6 no-padding exclusive-right">
+				<div class="active-exclusive-product-slider">
+					@foreach (var item in homeFlag)
+					{
+						var giaGoc = item.Price;
+						var giaKhuyenMai = item.Price - item.Price / 100 * (item.Discount == null ? 0 : item.Discount);
+						<!-- single exclusive carousel -->
+						<div class="single-exclusive-slider">
+							<img class="img-fluid" src="@item.Thumb" alt="">
+							<div class="product-details">
+								<div class="price">
+									<h6>@giaKhuyenMai.ToString("N0") VNĐ</h6>
+									<h6 class="l-through">@giaGoc.ToString("N0") VNĐ</h6>
+								</div>
+								<h4>@item.ProductName</h4>
+								<div class="add-bag d-flex align-items-center justify-content-center">
+									<a class="add-btn" href="single-product.html"><span class="ti-bag"></span></a>
+									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<br>
+<!-- End exclusive deal Area -->
+<!-- Start voucher Area -->
+<!-- create 3x2 grid -->
+<section class="voucher-area">
+	<div class="row justify-content-center">
+		<div class="col-lg-6 text-center">
+			<div class="section-title">
+				<h1>Ưu đãi đặc biệt</h1>
+				<p>Nhận ngay Voucher cực hot.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row" id="freeship">
+			@foreach (var item in FreeShip)
+			{
+				<div class="col-">
+					<div trackinfo="" clicktrackinfo="" data-tracker="lzdrwb-voucher"
+					autoexp_data="{&quot;lifecycle&quot;:&quot;exp&quot;,&quot;scene_id&quot;:&quot;12003072&quot;,&quot;tag_id&quot;:&quot;-1&quot;,&quot;app&quot;:&quot;mtop2_LAZADA_campaignTools_module&quot;,&quot;promotion_id&quot;:900000009104078,&quot;promotion_source&quot;:&quot;promotion&quot;,&quot;promotion_status&quot;:&quot;1&quot;,&quot;percent_amount&quot;:10,&quot;userdata&quot;:{&quot;promotion_id&quot;:900000009104078,&quot;module_id&quot;:&quot;5750146100&quot;,&quot;page_id&quot;:80010326,&quot;campaign_id&quot;:&quot;1000776&quot;}}"
+					class="rax-view aplus-common-data-tracker aplus-benefit-data-tracker"
+					style="box-sizing: border-box; display: flex; position: relative; flex-direction: row; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw 12px 0vw 0vw; padding: 0vw; min-width: 0vw; width: 340px; height: 172px; border-radius: 18px; overflow: hidden;"
+					data-aplus-ae="x25_735035b0" data-spm-anchor-id="a2o4n.tm80010326.5750146100.i0.3ddcqpecqpecrN"><img
+						src="//lzd-img-global.slatic.net/g/tps/imgextra/i1/O1CN01FfIfN71sXujPUJWru_!!6000000005777-2-tps-346-172.png_720x720q80.png_.webp"
+						with="340px" data-once="true"
+						style="width: 340px; height: 172px; position: absolute; left: 0vw; top: 0vw; object-fit: contain;">
+						<div class="rax-view"
+						style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw; width: 103px; overflow: hidden;">
+							<div class="rax-view"
+							style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; place-content: flex-start center; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 15px 0vw; min-width: 0vw; width: 102px; height: 172px; align-items: center;">
+								<img src="https://lzd-img-global.slatic.net/g/tps/tfs/TB1Iey_osKfxu4jSZPfXXb3dXXa-96-96.png_120x120q80.png_.webp"
+								with="60px" data-once="true"
+								style="width: 60px; height: 60px; border-radius: 30px; border: 1px solid rgb(10, 148, 244); background-color: rgb(255, 255, 255); object-fit: contain;">
+								@* <div class="rax-view"
+									style="box-sizing: border-box; display: flex; position: relative; flex-direction: column;
+									flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid;
+									border-color: black; margin: 0vw; padding: 6px 2px 0vw; min-width: 0vw; width: 108px;">
+									<span class="text" numberoflines="2"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative;
+									box-sizing: border-box; display: -webkit-box; flex-direction: column; align-content:
+									flex-start; flex-shrink: 0; font-size: 14px; white-space: pre-wrap; color: rgb(10, 148,
+									244); text-align: center; overflow: hidden; text-overflow: ellipsis; font-family:
+									NotoSans-Regular; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Free
+									Shiping</span>
+									</div> *@
+								<div class="rax-view"
+								style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw 2px; min-width: 0vw; width: 108px;">
+									<span class="text" numberoflines="1"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 12px; white-space: nowrap; color: rgb(10, 147, 243); text-align: center; overflow: hidden; text-overflow: ellipsis; word-break: break-all; font-weight: 900; font-style: italic; font-family: NotoSans-SemiBold;">Free
+										Shiping</span>
+								</div>
+							</div>
+						</div>
+						<div class="rax-view"
+						style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; place-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw 10px; min-width: 0vw; width: 242px; height: 172px; align-items: flex-start;">
+							<!---->
+						<div class="rax-view"
+							style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; place-content: flex-start center; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw; height: 117px;">
+								<div class="rax-view"
+								style="box-sizing: border-box; display: flex; position: relative; flex-direction: row; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw;"
+								data-spm-anchor-id="a2o4n.tm80010326.5750146100.i4.3ddcqpecqpecrN"><span class="text"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 30px; white-space: pre-wrap; font-weight: 600; font-family: NotoSans-SemiBold; color: rgb(10, 148, 244);">@item.Value.ToString("N0")</span><span
+									class="text"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 20px; white-space: pre-wrap; font-weight: 600; margin-right: 4px; margin-top: 10px; font-family: NotoSans-SemiBold; color: rgb(10, 148, 244);">OFF</span><!---->
+							</div>
+								<div class="rax-view"
+								style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw;">
+									<span class="text" numberoflines="1"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 20px; white-space: nowrap; line-height: 24px; min-height: 30px; width: 222px; overflow: hidden; text-overflow: ellipsis; word-break: break-all; text-align: left; font-family: NotoSans-Regular; color: rgb(10, 148, 244);">Áp
+										dụng cho đơn hàng từ </span>
+								</div>
+								<div class="rax-view" style="box-sizing: border-box; display: flex; position: relative; flex-direction: column;
+									flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid;
+									border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw;">
+									<span class="text" numberoflines="1" style="border-width: 0px; border-style: solid; border-color: black; position: relative;
+									box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start;
+									flex-shrink: 0; font-size: 22px; white-space: nowrap; line-height: 24px; width: 222px;
+									overflow: hidden; text-overflow: ellipsis; text-align: left; font-family: NotoSans-Regular;
+									color: rgb(10, 148, 244);" data-spm-anchor-id="a2o4n.tm80010326.5750146100.i2.3ddcqpecqpecrN">₫
+										@item.TotalMoneyRequire.ToString("N0") </span>
+								</div>
+							</div>
+							<div class="rax-view"
+							style="box-sizing: border-box; display: flex; position: absolute; flex-direction: row; flex-shrink: 0; place-content: center; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw 10px; min-width: 122px; line-height: 42px; border-radius: 21px; text-align: center; max-width: 160px; bottom: 13px; left: 10px; background-image: linear-gradient(to right, rgb(97, 190, 255), rgb(10, 148, 244));">
+								<a asp-controller="Voucher" asp-action="AddVoucher" asp-route-VoucherID="@item.VoucherId">
+									<span class="text button" numberoflines="1" id=@item.VoucherId
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 24px; white-space: nowrap; color: rgb(255, 255, 255); overflow: hidden; text-overflow: ellipsis; min-width: 112px; max-width: 140px; font-weight: 700; font-family: NotoSans-SemiBold;">Collect</span>
+								</a>
+							</div>
+						</div><!---->
+				</div>
+				</div>
+			}
+		</div>
+		<div class="row" id="discount">
+			@foreach (var item in Discount)
+			{
+				<div class="col-">
+					<div trackinfo="" clicktrackinfo="" data-tracker="lzdrwb-voucher"
+					autoexp_data="{&quot;lifecycle&quot;:&quot;exp&quot;,&quot;scene_id&quot;:&quot;12003072&quot;,&quot;tag_id&quot;:&quot;-1&quot;,&quot;app&quot;:&quot;mtop2_LAZADA_campaignTools_module&quot;,&quot;promotion_id&quot;:900000009104078,&quot;promotion_source&quot;:&quot;promotion&quot;,&quot;promotion_status&quot;:&quot;1&quot;,&quot;percent_amount&quot;:10,&quot;userdata&quot;:{&quot;promotion_id&quot;:900000009104078,&quot;module_id&quot;:&quot;5750146100&quot;,&quot;page_id&quot;:80010326,&quot;campaign_id&quot;:&quot;1000776&quot;}}"
+					class="rax-view aplus-common-data-tracker aplus-benefit-data-tracker"
+					style="box-sizing: border-box; display: flex; position: relative; flex-direction: row; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw 12px 0vw 0vw; padding: 0vw; min-width: 0vw; width: 340px; height: 172px; border-radius: 18px; overflow: hidden;"
+					data-aplus-ae="x25_735035b0" data-spm-anchor-id="a2o4n.tm80010326.5750146100.i0.3ddcqpecqpecrN"><img
+						src="//lzd-img-global.slatic.net/g/tps/imgextra/i1/O1CN01FfIfN71sXujPUJWru_!!6000000005777-2-tps-346-172.png_720x720q80.png_.webp"
+						with="340px" data-once="true"
+						style="width: 340px; height: 172px; position: absolute; left: 0vw; top: 0vw; object-fit: contain;">
+						<div class="rax-view"
+						style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw; width: 103px; overflow: hidden;">
+							<div class="rax-view"
+							style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; place-content: flex-start center; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 15px 0vw; min-width: 0vw; width: 102px; height: 172px; align-items: center;">
+								<img src="https://lzd-img-global.slatic.net/g/tps/tfs/TB1Iey_osKfxu4jSZPfXXb3dXXa-96-96.png_120x120q80.png_.webp"
+								with="60px" data-once="true"
+								style="width: 60px; height: 60px; border-radius: 30px; border: 1px solid rgb(10, 148, 244); background-color: rgb(255, 255, 255); object-fit: contain;">
+								@* <div class="rax-view"
+									style="box-sizing: border-box; display: flex; position: relative; flex-direction: column;
+									flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid;
+									border-color: black; margin: 0vw; padding: 6px 2px 0vw; min-width: 0vw; width: 108px;">
+									<span class="text" numberoflines="2"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative;
+									box-sizing: border-box; display: -webkit-box; flex-direction: column; align-content:
+									flex-start; flex-shrink: 0; font-size: 14px; white-space: pre-wrap; color: rgb(10, 148,
+									244); text-align: center; overflow: hidden; text-overflow: ellipsis; font-family:
+									NotoSans-Regular; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">Voucher
+									Max</span>
+									</div> *@
+								<div class="rax-view"
+								style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw 2px; min-width: 0vw; width: 108px;">
+									<span class="text" numberoflines="1"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 12px; white-space: nowrap; color: rgb(10, 147, 243); text-align: center; overflow: hidden; text-overflow: ellipsis; word-break: break-all; font-weight: 900; font-style: italic; font-family: NotoSans-SemiBold;">Voucher
+										Max</span>
+								</div>
+							</div>
+						</div>
+						<div class="rax-view"
+						style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; place-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw 10px; min-width: 0vw; width: 242px; height: 172px; align-items: flex-start;">
+							<!---->
+						<div class="rax-view"
+							style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; place-content: flex-start center; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw; height: 117px;">
+								<div class="rax-view"
+								style="box-sizing: border-box; display: flex; position: relative; flex-direction: row; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw;"
+								data-spm-anchor-id="a2o4n.tm80010326.5750146100.i4.3ddcqpecqpecrN"><span class="text"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 30px; white-space: pre-wrap; font-weight: 600; font-family: NotoSans-SemiBold; color: rgb(10, 148, 244);">@item.Value.ToString("N0")</span><span
+									class="text"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 20px; white-space: pre-wrap; font-weight: 600; margin-right: 4px; margin-top: 10px; font-family: NotoSans-SemiBold; color: rgb(10, 148, 244);">OFF</span><!---->
+							</div>
+								<div class="rax-view"
+								style="box-sizing: border-box; display: flex; position: relative; flex-direction: column; flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw;">
+									<span class="text" numberoflines="1"
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 20px; white-space: nowrap; line-height: 24px; min-height: 30px; width: 222px; overflow: hidden; text-overflow: ellipsis; word-break: break-all; text-align: left; font-family: NotoSans-Regular; color: rgb(10, 148, 244);">Áp
+										dụng cho đơn hàng từ </span>
+								</div>
+								<div class="rax-view" style="box-sizing: border-box; display: flex; position: relative; flex-direction: column;
+									flex-shrink: 0; align-content: flex-start; border-width: 0vw; border-style: solid;
+									border-color: black; margin: 0vw; padding: 0vw; min-width: 0vw;">
+									<span class="text" numberoflines="1" style="border-width: 0px; border-style: solid; border-color: black; position: relative;
+									box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start;
+									flex-shrink: 0; font-size: 22px; white-space: nowrap; line-height: 24px; width: 222px;
+									overflow: hidden; text-overflow: ellipsis; text-align: left; font-family: NotoSans-Regular;
+									color: rgb(10, 148, 244);" data-spm-anchor-id="a2o4n.tm80010326.5750146100.i2.3ddcqpecqpecrN">₫
+										@item.TotalMoneyRequire.ToString("N0")</span>
+								</div>
+							</div>
+							<div class="rax-view"
+							style="box-sizing: border-box; display: flex; position: absolute; flex-direction: row; flex-shrink: 0; place-content: center; border-width: 0vw; border-style: solid; border-color: black; margin: 0vw; padding: 0vw 10px; min-width: 122px; line-height: 42px; border-radius: 21px; text-align: center; max-width: 160px; bottom: 13px; left: 10px; background-image: linear-gradient(to right, rgb(97, 190, 255), rgb(10, 148, 244));">
+								<a asp-controller="Voucher" asp-action="AddVoucher" asp-route-VoucherID="@item.VoucherId">
+									<span class="text button" numberoflines="1" id=@item.VoucherId
+									style="border-width: 0px; border-style: solid; border-color: black; position: relative; box-sizing: border-box; display: block; flex-direction: column; align-content: flex-start; flex-shrink: 0; font-size: 24px; white-space: nowrap; color: rgb(255, 255, 255); overflow: hidden; text-overflow: ellipsis; min-width: 112px; max-width: 140px; font-weight: 700; font-family: NotoSans-SemiBold;">Collect</span>
+								</a>
+							</div>
+						</div><!---->
+				</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>

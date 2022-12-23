@@ -1,0 +1,101 @@
+﻿@model store_3TN.Models.Order
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var orderDetails = ViewBag.orderDetails;
+    var products = ViewBag.products;
+    Dictionary<int, Product> listProducts = new Dictionary<int, Product>();
+    foreach(var item in products)
+    {
+        listProducts.Add(item.ProductId, item);
+    }
+    var customers = ViewBag.customers;
+    Dictionary<int, Customer> listCustomers = new Dictionary<int, Customer>();
+    foreach (var item in customers)
+    {
+        listCustomers.Add(item.CustomerId, item);
+    }
+}
+
+<div class="header-sub-title">
+    <nav class="breadcrumb breadcrumb-dash">
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">Danh sách đơn hàng</a>
+        <span class="breadcrumb-item active">Chi tiết đơn hàng</span>
+
+    </nav>
+</div>
+<br />
+<h1>Thông tin khách hàng</h1>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+            <tbody>
+                @* <tr>
+                <td>ID: </td>
+                <td class="text-dark font-weight-semibold">@Model.CustomerId</td>
+                </tr>*@
+                <tr>
+                    <td>Tên khách hàng: </td>
+                    <td>@listCustomers[Model.CustomerId.Value].FullName</td>
+                </tr>
+                <tr>
+                    <td>Ngày đặt hàng:  </td>
+                    <td>@Model.OrderDate</td>
+                </tr>
+                <tr>
+                    <td>Ngày giao hàng dự kiến: </td>
+                    <td>@Model.ShipDate</td>
+                </tr>
+                <tr>
+                    <td>Tổng tiền: </td>
+                    <td>@Model.TotalMoney.ToString("N0") VNĐ</td>
+                </tr>             
+                <tr>
+                    <td>Tỉnh/thành phố: </td>
+                    <td>@Model.Province</td>
+                </tr>
+                <tr>
+                    <td>Quận/huyện: </td>
+                    <td>@Model.District</td>
+                </tr>
+                <tr>
+                    <td>Xã/thị trấn: </td>
+                    <td>@Model.Ward</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+</div>
+<h1>Chi tiết đơn hàng</h1>
+<br />
+<div class="table-responsive">
+    <table class="table table-hover e-commerce-table">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody >
+            @if (orderDetails != null)
+            {
+                foreach (var item in orderDetails)
+                {
+                    <tr>
+                        <td>@listProducts[item.ProductId].ProductName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Price</td>
+                        <td>@item.TotalMoney.ToString("#,##0") VNĐ</td>
+                       
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

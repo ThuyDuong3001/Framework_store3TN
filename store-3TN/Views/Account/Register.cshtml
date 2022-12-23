@@ -1,0 +1,76 @@
+﻿@using store_3TN.Controllers
+@model AccountController.CustomerAccount
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Đăng nhập / Đăng ký</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Đăng nhập / Đăng ký</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>Đã có tài khoản?</h4>
+                        <p>Đăng nhập vào website của chúng tôi!</p>
+                        <a class="primary-btn" asp-action="login" asp-controller="account">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner ">
+                    <h3>Đăng ký vào trang web</h3>
+                    <form method="post" class="row login_form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="col-md-12 form-group">
+                            <input class="form-control" type="text" asp-for="Account.UserName"
+                                placeholder="Tên đăng nhập">
+                            <span asp-validation-for="Account.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input class="form-control" type="password" asp-for="Account.PasswordHash"
+                                placeholder="Mật khẩu">
+                            <span asp-validation-for="Account.PasswordHash" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input class="form-control" type="text" asp-for="Customer.FullName" placeholder="Họ và tên">
+                            <span asp-validation-for="Customer.FullName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input class="form-control" type="text" asp-for="Customer.Phone"
+                                placeholder="Số điện thoại">
+                            <span asp-validation-for="Customer.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input class="form-control" type="text" asp-for="Customer.Email"
+                                placeholder="Địa chỉ email">
+                            <span asp-validation-for="Customer.Email" class="text-danger"></span>
+                        </div>
+                        <div class="mt-4 col-md-12 form-group">
+                            <input type="submit" value="Đăng ký" name="submit" class="primary-btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->

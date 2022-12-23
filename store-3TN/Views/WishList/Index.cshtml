@@ -1,0 +1,100 @@
+@using store_3TN.Models;
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Sản phẩm yêu thích";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Product> WL = new List<Product>();
+    var listProduct = ViewBag.listProduct;
+    // select Product in listProduct if ProductID in Model
+    foreach (var item in Model)
+    {
+        foreach (var product in listProduct)
+        {
+            if (item.ProductId == product.ProductId)
+            {
+                WL.Add(product);
+            }
+        }
+    }
+}
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Sản phẩm yêu thích</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Sản phẩm yêu thích</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in WL)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/category/@item.ProductId">
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="@item.Thumb" class='img-product' alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <p>@item.ProductName</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn-delete ml-3 genric-btn default-border small" asp-controller="wishlist"
+                                    asp-action="remove" asp-route-ProductID=@item.ProductId>Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                        <tr class="bottom_button">
+                            <td>
+                                <a asp-controller="wishlist" asp-action="removeall"
+                                    class="primary-btn btn-delete ml-3 genric-btn" name="xoahet">Xóa
+                                    hết</a>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            @* @if (WL.Count == 0)
+                {
+                <tr>
+                <td>
+                <h3>Không có sản phẩm nào trong danh sách yêu thích</h3>
+                </td>
+                </tr>
+                }
+                else
+                {
+
+                } *@
+        </div>
+    </div>
+</section>

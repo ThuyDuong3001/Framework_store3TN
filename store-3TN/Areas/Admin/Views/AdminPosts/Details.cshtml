@@ -1,0 +1,47 @@
+﻿@model store_3TN.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminPosts" asp-action="Index">Danh sách bài viết</a>
+            <span class="breadcrumb-item active">Thông tin bài viết</span>
+        </nav>
+    </div>
+</div>
+<div class="card-body">
+    <h1 class="card-title">Thông tin bài viết</h1>
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+            <tbody>
+                <tr>
+                    <td>ID: </td>
+                    <td class="text-dark font-weight-semibold">@Model.PostId</td>
+                </tr>
+                <tr>
+                    <td>Tên bài viết: </td>
+                    <td>@Model.Title</td>
+                </tr>
+                <tr>
+                    <td>Mô tả ngắn: </td>
+                    <td>@Model.Scontents</td>
+                </tr>
+                <tr>
+                    <td>Ngày đăng: </td>
+                    <td>@Model.CreatedDate</td>
+                </tr>
+                <tr>
+                    <td>Tác giả: </td>
+                    <td>@Model.Author</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+</div>

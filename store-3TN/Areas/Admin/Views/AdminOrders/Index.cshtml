@@ -1,0 +1,87 @@
+﻿@model PagedList.Core.IPagedList<store_3TN.Models.Order>
+
+@{
+	ViewData["Title"] = "Danh sách đơn hàng";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int CurrentPage = ViewBag.CurrentPage;
+
+}
+
+<div class="page-header">
+	<div class="header-sub-title">
+		<nav class="breadcrumb breadcrumb-dash">
+			<a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i
+					class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+			<a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">Danh sách đơn
+				hàng</a>
+			@* <span class="breadcrumb-item active">Tạo mới quyền truy cập</span>
+			*@
+		</nav>
+	</div>
+	<!--End page header -->
+	<br />
+	<br />
+	<h1>Danh sách đơn hàng</h1>
+
+	<div class="card">
+		<div class="card-body">
+			<div class="row m-b-30">
+				<div class="col-lg-8">
+				</div>
+			</div>
+			<!--Start input search -->
+
+		</div>
+		<div class="table-responsive">
+			<table class="table table-hover e-commerce-table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Tên khách hàng</th>
+						<th>Ngày đặt hàng</th>
+						<th>Tổng tiền</th>
+						<th>Trạng thái</th>
+						<th>Thao tác</th>
+					</tr>
+				</thead>
+				<tbody id="records_table">
+					@if (@Model != null)
+					{
+						foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.OrderId</td>
+								@if (item.Customer != null)
+								{
+									<td>@item.Customer.FullName</td>
+
+								}
+								else
+								{
+									<td></td>
+								}
+								<td>@item.OrderDate</td>
+								<td>@item.TotalMoney.ToString("#,##0") VNĐ</td>
+								<td>@item.TransactStatus</td>
+
+								<td>
+									<a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminOrders"
+								asp-action="Details" asp-route-id="@item.OrderId">Chi tiết</a>
+									<a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminOrders"
+								asp-action="Edit" asp-route-id="@item.OrderId">Cập nhật</a>
+								</td>
+							</tr>
+						}
+					}
+				</tbody>
+			</table>
+			<div aria-label="Page navigation example">
+				<ul class="pagination">
+					<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminOrders"
+						asp-action="Index"></pager>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

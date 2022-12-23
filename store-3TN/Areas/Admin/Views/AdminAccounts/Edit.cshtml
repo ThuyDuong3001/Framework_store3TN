@@ -1,0 +1,51 @@
+﻿@model store_3TN.Models.Account
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="header-sub-title">
+    <nav class="breadcrumb breadcrumb-dash">
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index">Danh sách tài khoản quản trị</a>
+        <span class="breadcrumb-item active">Chỉnh sửa tài khoản quản trị</span>
+    </nav>
+</div>
+<br />
+<h1>Chỉnh sửa tài khoản</h1>
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AccountId" />
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label" >Tên người dùng</label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordHash"  class="control-label">Mật khẩu</label>
+                <input asp-for="PasswordHash" type="password"  class="form-control" required/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Active" /> Hoạt động
+                </label>
+            </div>
+            <div class="form-group">
+                <select class="custom-select" asp-for="RoleId" style="min-width: 200px;" asp-items="ViewBag.Quyentruycap">
+                    <option value="" disabled selected>Chọn quyền</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

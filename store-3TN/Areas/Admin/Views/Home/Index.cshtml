@@ -1,0 +1,172 @@
+﻿@model IEnumerable<store_3TN.Models.Product>
+
+@{
+    ViewData["Title"] = "Tổng quan";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var countProduct = ViewBag.countProduct;
+    var salesProduct = ViewBag.salesProduct;
+    var countOrder = ViewBag.countOrder;
+    var countCustomer = ViewBag.countCustomer;
+    var topProduct = ViewBag.topProduct;
+    var products = ViewBag.products;
+    var bestSeller = ViewBag.bestSeller;
+
+}
+<div class="row">
+    <div class="col-lg-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Doanh số</p>
+                                <h2 class="m-b-0">@salesProduct.ToString("N0") VNĐ </h2>
+                            </div>
+                            @*<span class="badge badge-pill badge-cyan font-size-12">
+                                <i class="anticon anticon-arrow-up"></i>
+                                <span class="font-weight-semibold m-l-5">6.71%</span>
+                                </span>*@
+                        </div>
+                        <div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge badge-primary badge-dot m-r-10"></span>
+                                    <span class="text-gray font-weight-semibold font-size-13">Mục tiêu tháng</span>
+                                </div>
+                                <span class="text-dark font-weight-semibold font-size-13">@(Math.Round((float)salesProduct / 5000000))%</span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                                <div class="progress-bar bg-primary" style="width: @(Math.Round((float)salesProduct/5000000))%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Đơn hàng</p>
+                                <h2 class="m-b-0">@countOrder</h2>
+                            </div>
+                            @*<span class="badge badge-pill badge-red font-size-12">
+                                <i class="anticon anticon-arrow-down"></i>
+                                <span class="font-weight-semibold m-l-5">3.26%</span>
+                                </span>*@
+                        </div>
+                        <div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge badge-success badge-dot m-r-10"></span>
+                                    <span class="text-gray font-weight-semibold font-size-13">Mục tiêu tháng</span>
+                                </div>
+                                <span class="text-dark font-weight-semibold font-size-13">
+                                    @(Math.Round((countOrder / (float)0.5),2))% </ span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                                <div class="progress-bar bg-success" style="width:@((float)countOrder/0.5 )%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Sản phẩm</p>
+                                <h2 class="m-b-0">@countProduct</h2>
+                            </div>
+                            <span class="badge badge-pill badge-red font-size-12">
+                                <i class="fi fi-ss-mobile-button"></i>
+                                <span class="font-weight-semibold m-l-5">N/A</span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Khách hàng</p>
+                                <h2 class="m-b-0">@countCustomer</h2>
+                            </div>
+                            <span class="badge badge-pill badge-gold font-size-12">
+                                <i class="anticon anticon-arrow-up"></i>
+                                <span class="font-weight-semibold m-l-5">N/A</span>
+                            </span>
+                        </div>
+                        @*<div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                            <span class="badge badge-secondary badge-dot m-r-10"></span>
+                            <span class="text-gray font-weight-semibold font-size-13">Monthly Goal</span>
+                            </div>
+                            <span class="text-dark font-weight-semibold font-size-13">50% </span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                            <div class="progress-bar bg-secondary" style="width: 50%"></div>
+                            </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card">
+
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Top sản phẩm bán chạy</h5>
+                    <div>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-default">View All</a>
+                    </div>
+                </div>
+                <div class="m-t-30">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-h-0">
+                            @foreach (var item in bestSeller)
+                            {
+                                <div class="d-flex align-items-center justify-content-between">
+
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-image m-r-15">
+                                            <img src="@item.Thumb" alt="">
+                                        </div>
+
+                                        <div>
+                                            <h6 class="m-b-0">
+                                                <a href="#" class="text-dark">@item.ProductName</a>
+                                            </h6>
+                                            <span class="text-muted font-size-13">@item.Price.ToString("N0") VNĐ</span>
+                                        </div>
+
+
+                                    </div>
+
+                                    <span class="badge badge-pill badge-gold font-size-12">
+                                        <i class="anticon anticon-arrow-up"></i>
+                                        <span class="font-weight-semibold m-l-5">N/A</span>
+
+                                </div>
+                                <br>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model PagedList.Core.IPagedList<store_3TN.Models.Post>
+
+@{
+    ViewData["Title"] = "Danh sách blog";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int CurrentPage = ViewBag.CurrentPage;}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminPosts" asp-action="Index">Danh sách tin tức</a>
+            @*            <span class="breadcrumb-item active">Tạo mới quyền truy cập</span>
+            *@
+        </nav>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-lg-11 mx-auto">
+            <div class="row">
+                @if (@Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" title="@item.Title" src="@item.Thumb" alt="">
+                            <div class="card-body">
+                                <h4 class="m-t-10" title="@item.Title" style="display: -webkit-box;
+                            max-height: 4.8rem;
+                           -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: normal;
+                            -webkit-line-clamp: 2;
+                            line-height: 1.6rem;">
+                                    @item.Title
+                                </h4>
+                                <p class="m-b-20" style="display: -webkit-box;
+                            max-height: 4.8rem;
+                           -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: normal;
+                            -webkit-line-clamp: 3;
+                            line-height: 1.6rem;">@item.Scontents</p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="m-b-0 text-dark font-weight-semibold font-size-15" >@item.CreatedDate.Value.ToString("dd/mm/yyyy")</p>
+                                    @*<a class="text-primary btn btn-sm btn-hover" href="blog-post.html">
+                                        <span>Đọc thêm</span>
+                                    </a>*@
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex align-items-center m-t-5">
+                                    <a class="text-primary btn btn-sm btn-hover" asp-area="Admin" asp-controller="AdminPosts" asp-action="Details" asp-route-id="@item.PostId">
+                                        <span>Chi tiết</span>
+                                    </a>
+                                    <div class="m-l-10">
+                                        <a class="text-primary btn btn-sm btn-hover" asp-area="Admin" asp-controller="AdminPosts" asp-action="Edit" asp-route-id="@item.PostId">
+                                            <span>Sửa</span>
+                                        </a>
+                                    </div>
+                                    <div class="m-l-10">
+                                        <a class="text-primary btn btn-sm btn-hover" asp-area="Admin" asp-controller="AdminPosts" asp-action="Delete" asp-route-id="@item.PostId">
+                                            <span>Xóa</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                }
+            }
+                   
+            </div>
+        </div>
+    </div>
+<div aria-label="pagination justify-content-center">
+    <ul class="pagination">
+        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminPosts" asp-action="Index"></pager>
+    </ul>
+</div>
+   

@@ -1,0 +1,96 @@
+@model store_3TN.Models.Account
+@{
+    ViewData["Title"] = "Lịch sử mua hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var orders = ViewBag.Orders;
+    var orderDetails = ViewBag.OrderDetails;
+    var products = ViewBag.Products;
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Lịch sử mua hàng</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">
+                        Lịch sử mua hàng </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<section>
+    <div class="tab-pane" id="order" role="tabpanel" aria-labelledby="order-tab">
+        <div class="container">
+            <br>
+            <div class="table-responsive">
+                @foreach (var item in orders)
+                {
+                    var tt = item.TotalMoney - item.Discount;
+                    <div style='background: #eee; padding: 10px; margin-bottom: 20px'>
+                        <div class='row order_d_inner' style='margin: 0'>
+                            <div class='col-lg-4'>
+                                <div class='details_item'>
+                                    <ul class='list'>
+                                        <li><span class='mr-3'>Mã đơn: @item.OrderId</span></li>
+                                        <li><span class='mr-3'>Ngày đặt: @item.OrderDate</span></li>
+                                        <li><span>Tổng tiền: @tt.ToString("N0")</span> VNĐ</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class='col-lg-4'>
+                                <div class='details_item'>
+                                    <ul class='list'>
+                                        <li><span>Địa chỉ: @item.Ward, @item.District, @item.Province</span></li>
+                                        <li><span>Tình trạng: @item.TransactStatus</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='table-responsive'>
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col' class='text-center'>Hình ảnh</th>
+                                        <th scope='col' class='text-center'>Sản phẩm</th>
+                                        <th scope='col' class='text-center'>Số lượng</th>
+                                        <th scope='col' class='text-center'>Giá tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item2 in orderDetails[item.OrderId])
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href='single-product.php?idSP=2'>
+                                                    <img class='img-fluid' src=@products[item2.ProductId].Thumb
+                                                style='width: 100px; height: 50px; object-fit: contain; background: white; padding: 3px' />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href='single-product.php?idSP=2' style='color: black'>
+                                                    <p>@products[item2.ProductId].ProductName</p>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <h5>x @item2.Amount</h5>
+                                            </td>
+                                            <td>
+                                                <p>@item2.TotalMoney.ToString("N0") VNĐ</p>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

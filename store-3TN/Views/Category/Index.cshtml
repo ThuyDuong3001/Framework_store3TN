@@ -1,0 +1,370 @@
+﻿@using PagedList.Core.Mvc;
+@model PagedList.Core.IPagedList<store_3TN.Models.Product>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	int CurrentPage = 1;
+	int TotalPages = 1;
+	int StartPage = 1;
+	int EndPage = 1;
+	if (ViewBag.Pager != null)
+	{
+		CurrentPage = ViewBag.CurrentPage;
+		TotalPages = ViewBag.TotalPages;
+		StartPage = ViewBag.StartPage;
+		EndPage = ViewBag.EndPage;
+	}
+	var listColor = ViewBag.listColor;
+	var listRating = ViewBag.listRating;
+	Dictionary<int, int> totalRating = new Dictionary<int, int>();
+	Dictionary<int, int> numofRating = new Dictionary<int, int>();
+	foreach (var item in listRating)
+	{
+		if (totalRating.ContainsKey(item.ProductId))
+		{
+			totalRating[item.ProductId] += item.Rate;
+			numofRating[item.ProductId]++;
+		}
+		else
+		{
+			totalRating.Add(item.ProductId, item.Rate);
+			numofRating.Add(item.ProductId, 1);
+		}
+	}
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Sản phẩm</h1>
+				<nav class="d-flex align-items-center">
+					<a href="/home">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">Sản phẩm</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+<div class="container">
+	<div class="row">
+		<div class="col-xl-3 col-lg-4 col-md-5">
+			<div class="sidebar-categories">
+				<div class="head">Phân loại</div>
+				<ul class="main-categories">
+					<li class="main-nav-list"><a href="/category/type/1/"><span
+								class="lnr lnr-arrow-right"></span>Iphone</a>
+					</li>
+
+					<li class="main-nav-list"><a href="/category/type/2/"><span
+								class="lnr lnr-arrow-right"></span>MacBook</a>
+					</li>
+					<li class="main-nav-list"><a href="/category/type/3/"><span
+								class="lnr lnr-arrow-right"></span>Ipad</a>
+					</li>
+					<li class="main-nav-list"><a href="/category/type/4/"><span
+								class="lnr lnr-arrow-right"></span>AirPods</a>
+					</li>
+					<li class="main-nav-list"><a href="/category/type/5/"><span class="lnr lnr-arrow-right"></span>Apple
+							Watch</a>
+					</li>
+				</ul>
+			</div>
+			<div class="sidebar-filter mt-50">
+				<div class="top-filter-head">Bộ lọc sản phẩm</div>
+				<div class="common-filter">
+					<div class="head">Màu sắc</div>
+					<form action="#">
+						<ul>
+							@foreach (var item in listColor)
+							{
+								<a href="?color=@item">
+									<li class="filter-list">@item</li>
+								</a>
+								@* <li class="filter-list"><input class="pixel-radio" type="radio" id="@item"
+									name="color"><label for="@item">@item</label>
+									</li> *@
+							}
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-9 col-lg-8 col-md-7">
+			<!-- Start Filter Bar -->
+			<div class="filter-bar d-flex flex-wrap align-items-center">
+				<div class="sorting">
+					@* <select>
+						<option value="1"></option>
+						<option value="1"></option>
+						</select> *@
+					<br>
+				</div>
+			</div>
+			<!-- End Filter Bar -->
+			<!-- Start Best Seller -->
+			<section class="lattest-product-area pb-40 category-list">
+				<div class="row" id="list-product">
+					<!-- single product -->
+					@if (Model.Count() != 0)
+					{
+						foreach (var item in Model)
+						{
+							int giaGoc = item.Price;
+							// if discount not null or != 0 giaBan = giaGoc - discount else giaBan = giaGoc
+							float giaBan = item.Discount != null ? (float)(100 - item.Discount.Value) / 100 * giaGoc : giaGoc;
+							int soSao = 0;
+							int soDanhGia = 0;
+							if (totalRating.ContainsKey(item.ProductId))
+							{
+								soSao = totalRating[item.ProductId] / numofRating[item.ProductId];
+								soDanhGia = numofRating[item.ProductId];
+							}
+							<div class="col-lg-4 col-md-6" title="@item.ProductName">
+								<div class="single-product">
+									<img class="img-fluid" src=@item.Thumb alt="">
+									<div class="product-details">
+										<h6 class="title">@item.ProductName</h6>
+										<div class="price">
+											<h6>@giaBan.ToString("N0") VNĐ</h6>
+											<h6 class="l-through">@giaGoc.ToString("N0") VNĐ</h6>
+										</div>
+										<div class="mt-2 d-flex align-items-center">
+											<div>
+												@for (int i = 0; i < soSao; i++)
+												{
+													<i class="fa fa-star star-rv"></i>
+												}
+												@for (int i = 0; i < 5 - soSao; i++)
+												{
+													<i class="fa fa-star-o star-rv"></i>
+												}
+											</div>
+											<span class="ml-2">@soDanhGia đánh giá</span>
+										</div>
+										<div class="prd-bottom">
+											@* post addtocart with productid*@
+											@* <a asp-controller="Cart" asp-action="AddToCart"
+												asp-route-productid="@item.ProductId" class="social-info">
+												<span class="ti-bag"></span>
+												<p class="hover-text">Thêm vào giỏ hàng</p>
+												</a> *@
+											@* <a href="@Url.Action("AddToCart", "Cart", new { ProductID = item.ProductId})"
+												class="social-info">
+												<span class="ti-bag"></span>
+												<p class="hover-text">Thêm vào giỏ hàng</p>
+												</a> *@
+
+											<a asp-controller="Cart" asp-action="AddToCart"
+										asp-route-ProductID="@item.ProductId" class="social-info">
+												<span class="ti-bag"></span>
+												<p class="hover-text">Mua ngay</p>
+											</a>
+											<a asp-controller="wishlist" asp-action="Add" asp-route-ProductID="@item.ProductId"
+										class="social-info">
+												<span class="lnr lnr-heart"></span>
+												<p class="hover-text">Yêu thích</p>
+											</a>
+											<a href="/category/@item.ProductId" class="social-info">
+												<span class="lnr lnr-move"></span>
+												<p class="hover-text">Chi tiết</p>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<div class="col-lg-12 col-md-12">
+							<div class="single-product">
+								<div class="product-details">
+									<p style="font-size: 30px;">Không có sản phẩm nào</p>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</section>
+			<!-- End Best Seller -->
+			<!-- Start Filter Bar -->
+			<div class="filter-bar d-flex flex-wrap align-items-center" style="background-color: white;">
+				<div class="pagination ml-auto">
+					@if (TotalPages > 0)
+					{
+						@if (CurrentPage > 1)
+						{
+							<a href="?page=@(CurrentPage-1)" class="prev-arrow"><i class="fa fa-long-arrow-left"
+							aria-hidden="true"></i></a>
+						}
+						@for (var pge = StartPage; pge <= EndPage; pge++)
+						{
+							@if (pge == CurrentPage)
+							{
+								<a href="#" class="active">@pge</a>
+							}
+							else
+							{
+								<a href="?page=@pge">@pge</a>
+							}
+						}
+						@if (CurrentPage < TotalPages)
+						{
+							<a href="?page=@(CurrentPage+1)" class="next-arrow"><i class="fa fa-long-arrow-right"
+							aria-hidden="true"></i></a>
+						}
+					}
+				</div>
+			</div>
+			<!-- End Filter Bar -->
+		</div>
+	</div>
+</div>
+
+@* <!-- Start related-product Area -->
+	<section class="related-product-area section_gap">
+	<div class="container">
+	<div class="row justify-content-center">
+	<div class="col-lg-6 text-center">
+	<div class="section-title">
+	<h1>Deal hot của tuần</h1>
+	<p>Khám phá ngay những ưu đãi hot trong tuần của chúng tôi.</p>
+	</div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-9">
+	<div class="row">
+	<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-6">
+	<div class="single-related-product d-flex">
+	<a href="single-product.html"><img src="~/img/product/macbook-pro.jpg" width="80"
+	height="60" alt=""></a>
+	<div class="desc">
+	<a href="single-product.html" class="title">MacBook Pro 2021</a>
+	<div class="price">
+	<h6>$189.00</h6>
+	<h6 class="l-through">$210.00</h6>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-3">
+	<div class="ctg-right">
+	<a href="" target="_blank">
+	<img class="img-fluid d-block mx-auto" src="~/img/category/c5.jpg" alt="">
+	</a>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+	<!-- End related-product Area --> *@

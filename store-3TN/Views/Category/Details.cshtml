@@ -1,0 +1,511 @@
+﻿@model store_3TN.Models.Product
+
+@{
+	ViewData["Title"] = Model.ProductName;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	int giaGoc = (int)Model.Price;
+	int giaBan = Model.Discount != null ? giaGoc - (int)Model.Discount : giaGoc;
+	Dictionary<Comment, List<Comment>> listComment = ViewBag.listComment;
+	string htmlStr = Model.Details;
+	// fix \"
+	htmlStr = htmlStr.Replace("\\\"", "\"");
+	htmlStr = htmlStr.Replace("\\r\\n", "\r\n");
+	var customers = ViewBag.Customers;
+	Dictionary<int, Customer> listCustomer = new Dictionary<int, Customer>();
+	foreach (var item in customers)
+	{
+		listCustomer.Add(item.CustomerId, item);
+	}
+	var RelatedProducts = ViewBag.RelatedProducts;
+	var listRating = ViewBag.listRating;
+	Dictionary<int, int> SLDanhGia = new Dictionary<int, int>();
+	for (int i = 1; i <= 5; i++)
+	{
+		SLDanhGia.Add(i, 0);
+	}
+	foreach (var item in listRating)
+	{
+		SLDanhGia[item.Rate]++;
+	}
+}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Chi tiết sản phẩm</h1>
+				<nav class="d-flex align-items-center">
+					<a href="/home">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+					<a href="/category/type/0/">Shop<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">Chi tiết</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+	<div class="container">
+		<div class="row s_product_inner">
+			<div class="col-lg-6">
+				<div class="s_Product_carousel">
+					<div class="single-prd-item">
+						<img class="img-fluid" src=@Model.Thumb alt="">
+					</div>
+					<div class="single-prd-item">
+						<img class="img-fluid" src=@Model.Thumb alt="">
+					</div>
+					<div class="single-prd-item">
+						<img class="img-fluid" src=@Model.Thumb alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5 offset-lg-1">
+				<div class="s_product_text">
+					<h3>@Model.ProductName</h3>
+					<h2>@giaBan.ToString("N0") VNĐ</h2>
+					<ul class="list">
+						<li><a class="active" href="#"><span>Phân loại</span> : @Model.Series</a></li>
+						<li><a href="#"><span>Tình trạng</span> : Còn hàng</a></li>
+					</ul>
+					<p>@Model.ShortDesc</p>
+					<ul>
+						<li><span class='lnr lnr-sync p-1'></span> Đổi trả trong vòng <strong>12 tháng</strong> tại 30
+							siêu
+							thị toàn quốc (miễn phí tháng đầu)</li>
+						<li><span class='lnr lnr-checkmark-circle p-1'></span> Bảo hành chính hãng <strong>1
+								năm</strong> tại các trung tâm bảo hành hãng</li>
+						<li><span class='lnr lnr-inbox p-1'></span> Bộ sản phẩm gồm: <strong>Hộp, Sách hướng dẫn, Cáp
+								Lightning - Type C, ...</strong></li>
+					</ul>
+					<div class="mt-5 product_count">
+						<label for="qty">Quantity:</label>
+						<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+							class="input-text qty">
+						<button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+						<button class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+					</div>
+					<div class="card_area d-flex align-items-center">
+						<a class="primary-btn" href="#">Thêm vào giỏ hàng</a>
+						<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--================End Single Product Area =================-->
+
+<!--================Product Description Area =================-->
+<section class="product_description_area">
+	<div class="container">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">Mô tả</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false">Cấu hình</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+					aria-controls="contact" aria-selected="false">Bình luận</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					aria-selected="false">Đánh giá</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<p>@Model.Description</p>
+			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<div class="table-responsive">
+					@Html.Raw(htmlStr)
+				</div>
+			</div>
+			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="comment_list">
+							@foreach (var item in listComment)
+							{
+								<div class="review_item">
+									<div class="media">
+										<div class="d-flex">
+											<img src=@listCustomer[item.Key.CustomerId.Value].Avatar alt="">
+										</div>
+										<div class="media-body">
+											<h4>@listCustomer[item.Key.CustomerId.Value].FullName</h4>
+											<h5>@item.Key.CreatedDate</h5>
+											<a class="reply_btn" href="#" id=@item.Key.CmtId>Trả lời</a>
+										</div>
+									</div>
+									<p>@item.Key.Comment1</p>
+								</div>
+								foreach (var ritem in item.Value)
+								{
+									<div class="review_item reply">
+										<div class="media">
+											<div class="d-flex">
+												<img src=@listCustomer[ritem.CustomerId.Value].Avatar alt="">
+											</div>
+											<div class="media-body">
+												<h4>@listCustomer[ritem.CustomerId.Value].FullName</h4>
+												<h5>@ritem.CreatedDate</h5>
+											</div>
+										</div>
+										<p>@ritem.Comment1</p>
+									</div>
+								}
+							}
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="review_box">
+							<h4>Để lại bình luận</h4>
+
+							<form class="row contact_form" action="#" method="post" id="contactForm"
+								novalidate="novalidate">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" name="message" id="message" rows="1"
+											placeholder="Bình luận"></textarea>
+									</div>
+								</div>
+								<div class="col-md-12 text-right">
+									<a href="#" class="btn primary-btn binhluan">Gửi ngay
+										@* <button type="submit" value="submit" class="btn primary-btn">Gửi
+											ngay</button> *@
+									</a>
+								</div>
+								<script>
+									// select all the tag <a> with id contact-tab
+									var ReplyTo = null;
+									var cmt_btns = document.querySelectorAll('#contact-tab');
+									// loop through the tag <a> with id contact-tab
+									cmt_btns.forEach(function (cmt_btn) {
+										cmt_btn.addEventListener('click', function (e) {
+											// prevent the default action of the link
+											e.preventDefault();
+											var textarea = document.querySelector("#message");
+											textarea.placeholder = "Bình luận";
+											ReplyTo = null;
+										});
+									})
+
+									// select all the tag <a> with class "reply_btn"
+									var reply_btns = document.querySelectorAll(".reply_btn");
+
+									reply_btns.forEach(function (reply_btn) {
+										// add event listener to each reply_btn
+										reply_btn.addEventListener("click", function (e) {
+											// prevent default action
+											e.preventDefault();
+											// get the parent of the reply_btn
+											var parent = reply_btn.parentNode;
+											// get the name of the user
+											var name = parent.querySelector("h4").textContent;
+											// get the textarea
+											var textarea = document.querySelector("#message");
+											// set the value of the textarea
+											textarea.placeholder = "Trả lời " + name + ": ";
+											// focus on the textarea
+											textarea.focus();
+											// set the ReplyTo is id of reply_btn
+											ReplyTo = reply_btn.id;
+									@* alert(ReplyTo); *@
+										});
+									});
+									// select all the tag <a> with class "primary-btn"
+									var btns = document.querySelectorAll(".binhluan");
+									// handle click event on each of them
+									btns.forEach(function (btn) {
+										btn.addEventListener("click", function () {
+											var message = document.getElementById("message").value;
+											var productId = @Model.ProductId;
+
+											$.ajax({
+												url: "/Comment/AddComment",
+												type: "POST",
+												data: {
+													ProductId: productId,
+													comment: message,
+													ReplyTo: ReplyTo
+												},
+												success: function (data) {
+													location.reload();
+												},
+												error: function (data) {
+													alert("Thêm bình luận thất bại");
+												}
+											});
+
+
+										});
+									});
+								</script>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="row total_rate">
+							<div class="col-6">
+								@{
+									int sl = 0;
+									int sosao = 0;
+								}
+								@if (listRating.Count > 0)
+								{
+									// tongsl is sum of SLDanhGia
+									sl = listRating.Count;
+									// sosao is sum of listRating / sl
+									sosao = SLDanhGia.Sum(x => x.Key * x.Value) / sl;
+								}
+								<div class="box_total">
+									<h5>Tổng quan</h5>
+									<h4>@sosao</h4>
+									<h6>(@sl đánh giá)</h6>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="rating_list">
+									<h3>Dựa trên @sl đánh giá</h3>
+									<ul class="list">
+										<li><a href="#">5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i> @SLDanhGia[5] lượt đánh giá </a></li>
+										<li><a href="#">4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star-o"></i> @SLDanhGia[4] lượt đánh giá</a></li>
+										<li><a href="#">3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star-o"></i><i
+													class="fa fa-star-o"></i> @SLDanhGia[3] lượt đánh giá</a></li>
+										<li><a href="#">2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
+													class="fa fa-star-o"></i> @SLDanhGia[2] lượt đánh giá</a></li>
+										<li><a href="#">1 Star <i class="fa fa-star"></i><i class="fa fa-star-o"></i><i
+													class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
+													class="fa fa-star-o"></i> @SLDanhGia[1] lượt đánh giá</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="review_list">
+							@foreach (var item in listRating)
+							{
+
+								<div class="review_item">
+									<div class="media">
+										<div class="d-flex">
+											<img src=@listCustomer[item.CustomerId].Avatar alt="">
+										</div>
+										<div class="media-body">
+											<h4>@listCustomer[item.CustomerId].FullName</h4>
+											<div>
+												@for (int i = 0; i < item.Rate; i++)
+												{
+													<i class="fa fa-star star-rv"></i>
+												}
+												@for (int i = 0; i < 5 - item.Rate; i++)
+												{
+													<i class="fa fa-star-o star-rv"></i>
+												}
+											</div>
+											<h5>@item.CreateDate</h5>
+										</div>
+									</div>
+									<p>@item.CmtContent</p>
+								</div>
+							}
+
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="review_box">
+							<h4>Để lại đánh giá</h4>
+							<p>Đánh giá của bạn:</p>
+							<ul class="list">
+								<li><a class="rate" id="s1"><i class="fa fa-star"></i></a></li>
+								<li><a class="rate" id="s2"><i class="fa fa-star"></i></a></li>
+								<li><a class="rate" id="s3"><i class="fa fa-star"></i></a></li>
+								<li><a class="rate" id="s4"><i class="fa fa-star"></i></a></li>
+								<li><a class="rate" id="s5"><i class="fa fa-star"></i></a></li>
+							</ul>
+							<script>
+								// select <a> tag class rate
+								var rate = document.querySelectorAll('.rate');
+								// add event click for each <a> tag
+								rate.forEach(function (item) {
+									if (item.id == "s1") {
+										item.addEventListener('click', function () {
+											// set value for input tag											// set color for <a> tag
+											item.style.color = "orange";
+											// set color for <a> tag
+											document.getElementById('s2').style.color = "black";
+											document.getElementById('s3').style.color = "black";
+											document.getElementById('s4').style.color = "black";
+											document.getElementById('s5').style.color = "black";
+										});
+									}
+									if (item.id == "s2") {
+										item.addEventListener('click', function () {
+											// set value for input tag
+											// set color for <a> tag
+											document.getElementById('s1').style.color = "orange";
+											item.style.color = "orange";
+											// set color for <a> tag
+											document.getElementById('s3').style.color = "black";
+											document.getElementById('s4').style.color = "black";
+											document.getElementById('s5').style.color = "black";
+										});
+									}
+									if (item.id == "s3") {
+										item.addEventListener('click', function () {
+											// set value for input tag
+											// set color for <a> tag
+											document.getElementById('s1').style.color = "orange";
+											document.getElementById('s2').style.color = "orange";
+											item.style.color = "orange";
+											// set color for <a> tag
+											document.getElementById('s4').style.color = "black";
+											document.getElementById('s5').style.color = "black";
+										});
+									}
+									if (item.id == "s4") {
+										item.addEventListener('click', function () {
+											// set value for input tag
+											// set color for <a> tag
+											document.getElementById('s1').style.color = "orange";
+											document.getElementById('s2').style.color = "orange";
+											document.getElementById('s3').style.color = "orange";
+											item.style.color = "orange";
+											// set color for <a> tag
+											document.getElementById('s5').style.color = "black";
+										});
+									}
+									if (item.id == "s5") {
+										item.addEventListener('click', function () {
+											// set value for input tag
+											// set color for <a> tag
+											document.getElementById('s1').style.color = "orange";
+											document.getElementById('s2').style.color = "orange";
+											document.getElementById('s3').style.color = "orange";
+											document.getElementById('s4').style.color = "orange";
+											item.style.color = "orange";
+										});
+									}
+								});
+							</script>
+							<form class="row contact_form" action="contact_process.php" method="post" id="contactForm"
+								novalidate="novalidate">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" name="message" id="messagedg" rows="1"
+											placeholder="Đánh giá" onfocus="this.placeholder = ''"
+											onblur="this.placeholder = 'Review'"></textarea></textarea>
+									</div>
+								</div>
+								<div class="col-md-12 text-right">
+									@* <button type="submit" value="submit" class="primary-btn">Gửi ngay</button> *@
+									<a href="#" class="btn primary-btn danhgia">Gửi ngay </a>
+								</div>
+							</form>
+							<script>
+								var danhgia = document.querySelectorAll('.danhgia');
+								danhgia.forEach(function (item) {
+									item.addEventListener('click', function () {
+										var sosao = 5;
+										if (document.getElementById('s2').style.color == "black") {
+											sosao = 1;
+										} else if (document.getElementById('s3').style.color == "black") {
+											sosao = 2;
+										} else if (document.getElementById('s4').style.color == "black") {
+											sosao = 3;
+										} else if (document.getElementById('s5').style.color == "black") {
+											sosao = 4;
+										}
+										var message = document.getElementById("messagedg").value;
+										var productId = @Model.ProductId;
+								@* $.ajax({
+									url: "/Rating/AddRating",
+									type: "POST",
+									data: {
+									productId: productId,
+									sosao: sosao,
+									comment: message
+									},
+									success: function (data) {
+									location.reload();
+									},
+									error: function (data) {
+									alert("Đánh giá thất bại");
+									}
+									}); *@
+											window.location.href = "/Rating/AddRating?productId=" + productId + "&sosao=" + sosao + "&comment=" + message;
+									});
+								});
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Product Description Area =================-->
+
+<!-- Start related-product Area -->
+<section class="related-product-area section_gap_bottom">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 text-center">
+				<div class="section-title">
+					<h1>Các sản phẩm tương tự</h1>
+					<p>Khám phá các sản phẩm tương tự của cửa hàng chúng tôi.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-9">
+				<div class="row">
+					@foreach (var item in RelatedProducts)
+					{
+						var gGoc = item.Price;
+						var gBan = item.Discount != null ? (float)(100 - item.Discount) / 100 * giaGoc : giaGoc;
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src=@item.Thumb width="80" height="60" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">@item.ProductName</a>
+									<div class="price">
+										<h6>@gBan.ToString("N0") VNĐ</h6>
+										<h6 class="l-through">@gGoc.ToString("N0") VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ctg-right">
+					<a href="#" target="_blank">
+						<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End related-product Area -->

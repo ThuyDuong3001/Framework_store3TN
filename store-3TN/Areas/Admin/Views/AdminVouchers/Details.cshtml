@@ -1,0 +1,59 @@
+﻿@model store_3TN.Models.Voucher
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="header-sub-title">
+    <nav class="breadcrumb breadcrumb-dash">
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+        <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminVouchers" asp-action="Index">Danh sách khuyến mãi</a>
+                    <span class="breadcrumb-item active">Chi tiết khuyến mãi</span>
+        
+    </nav>
+</div>
+<br />
+<h1>Chi tiết khuyến mãi</h1>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID: </td>
+                        <td class="text-dark font-weight-semibold">@Model.VoucherId</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả</td>
+                        <td>@Model.Desc</td>
+                    </tr>
+                    <tr>
+                        <td>Số lượng</td>
+                        <td>@Model.Amount</td>
+                    </tr>
+                    <tr>
+                        <td>Trị giá đơn hàng tối thiểu</td>
+                        <td>@Model.TotalMoneyRequire</td>
+                    </tr>
+                    <tr>
+                        <td>Trị giá khuyến mãi</td>
+                        <td>@Model.Value</td>
+                    </tr>
+                    <tr>
+                    <td>Tình trạng</td>
+                        @if (Model.IsActive == true)
+                        {
+                            <td>Hoạt động</td>
+                        }
+                        else
+                        {
+                        <td>Khóa</td>                  
+                        }
+                    </tr>
+
+            </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+    </div>
