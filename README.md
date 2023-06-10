@@ -39,12 +39,12 @@
 
 ## Các package sử dụng
 
-    * AspNetCoreHero.ToastNotification 
-    * Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
-    * Microsoft.EntityFrameworkCore.SqlServer
-    * Microsoft.EntityFrameworkCore.Tools
-    * Microsoft.VisualStudio.Web.CodeGeneration.Design
-    * PagedList.Core.Mvc
+- AspNetCoreHero.ToastNotification 
+- Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+- Microsoft.EntityFrameworkCore.SqlServer
+- Microsoft.EntityFrameworkCore.Tools
+- Microsoft.VisualStudio.Web.CodeGeneration.Design
+- PagedList.Core.Mvc
    
 ## HƯỚNG DẪN CÀI ĐẶT
 
